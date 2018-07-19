@@ -15,11 +15,14 @@ class DriversProblem::CLI
   end
 
   def making_objects
-    # puts @data[0]
     @data.each do |info|
-        puts info
-        puts "--------------------"
-        @resource = DriversProblem::Trips.new(info)
+      # puts info
+      # puts "--------------------"
+      if info.length > 2
+        DriversProblem::Trips.new(info)
+      else
+        DriversProblem::Drivers.new(info[1])
+      end
     end
   end
 

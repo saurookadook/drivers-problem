@@ -3,9 +3,9 @@ class DriversProblem::Drivers
 
   @@all = []
 
-  def initialize(name_arg)
-    puts "2-----------------2"
-    @name = name_arg[1]
+  def initialize(name)
+    # puts "2-----------------2"
+    @name = name
     @@all << self
   end
 
@@ -14,14 +14,10 @@ class DriversProblem::Drivers
   end
 
   def trip_output
-    # puts "#{self.name}: #{self.trip.miles_driven.to_i}"
-    DriversProblem::Trips.all.each do |trip|
-      # binding.pry
-      if trip.start_time
-        puts "#{self.name}: #{trip.miles_driven.to_i} miles @ #{trip.trip_speed} mph"
-      else
-        # puts "#{self.name}: 0 miles"
-      end
+    if self.trip
+      puts "#{self.name}: #{self.trip.miles_driven.to_i} miles @ #{self.trip.trip_speed} mph"
+    else
+      puts "#{self.name}: 0 miles"
     end
   end
 

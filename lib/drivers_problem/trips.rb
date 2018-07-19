@@ -5,8 +5,8 @@ class DriversProblem::Trips
   @@all = []
 
   def initialize(arg)
-    puts "1----------------1"
-    @driver = DriversProblem::Drivers.new(arg)
+    # puts "1----------------1"
+    self.find_driver(arg[1])
     arg[2] ? self.start_time=(arg[2]) : @start_time = nil
     arg[3] ? self.end_time=(arg[3]) : @end_time = nil
     arg[4] ? self.miles_driven=(arg[4]) : @miles_driven = nil
@@ -14,12 +14,14 @@ class DriversProblem::Trips
     @driver.trip = self
   end
 
-  def find_driver
-    if DriversProblem::Drivers.all.include?(@driver)
-      @driver
-    else
-      @driver = DriversProblem::Drivers.new(arg)
-    end
+  def self.all
+    @@all
+  end
+
+  def find_driver(arg)
+    @driver = DriversProblem::Drivers.all.detect { |driver| driver.name == arg }
+
+    @driver ||= DriversProblem::Drivers.new(arg)
   end
 
   def start_time=(data)
@@ -42,10 +44,6 @@ class DriversProblem::Trips
 
   def trip_speed
     @trip_speed = ((@miles_driven/self.trip_time)*60).round
-  end
-
-  def self.all
-    @@all
   end
 
 end
