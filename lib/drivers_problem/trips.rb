@@ -1,5 +1,5 @@
 class DriversProblem::Trips
-  attr_accessor :driver, :elapsed_time
+  attr_accessor :driver
   attr_reader :miles_driven, :trip_speed, :trip_output, :trip_time
 
   @@all = []
@@ -12,17 +12,22 @@ class DriversProblem::Trips
     # arg[3] ? self.end_time=(arg[3]) : @end_time = nil
     arg[4] ? self.miles_driven=(arg[4]) : @miles_driven = 0
     # puts "3-------------3"
-    @elapsed_time += self.calculate_time(arg[2], arg[3])
-    self.avg_speed
+    @driver.elapsed_time += self.calculate_time(arg[2], arg[3])
+    # self.avg_speed
     @@all << self
     @driver.trip = self
     @driver.trip_distance += @miles_driven if @miles_driven
+    puts "#{@driver.name} #{@driver.trip_distance} #{@elapsed_time}"
     # @driver.trip_distance += @miles_driven if @miles_driven && (@trip_speed < 5 || @trip_speed > 100)
     # puts "4-------------4"
   end
 
   def self.all
     @@all
+  end
+
+  def self.update_trip(arg)
+    # stuff
   end
 
   def calculate_time(start_time, end_time)
@@ -55,8 +60,8 @@ class DriversProblem::Trips
   # end
 
   def avg_speed
-    puts "1-------------1"
-    @trip_speed = ((@miles_driven/@trip_time)*60).round
+    # puts "1-------------1"
+    @trip_speed = ((@miles_driven/@driver.elapsed_time)*60).round
   end
 
 end

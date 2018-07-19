@@ -20,10 +20,21 @@ class DriversProblem::CLI
       # puts "6------ #{info[0]}, #{info[1]} -------6"
       case info[0]
       when "Trip"
-        DriversProblem::Trips.new(info)
+        # DriversProblem::Trips.new(info)
+        find_trip(info)
       when "Driver"
         DriversProblem::Drivers.new(info[1])
       end
+    end
+  end
+
+  def find_trip(arg)
+    driver = DriversProblem::Trips.all.detect { |trip| trip.driver.name == arg[1] }
+
+    if driver
+      DriversProblem::Trips.update_trip(arg) # make class method for this
+    else
+      DriversProblem::Trips.new(arg)
     end
   end
 
