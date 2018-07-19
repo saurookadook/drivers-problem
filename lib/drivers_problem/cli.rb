@@ -25,14 +25,15 @@ class DriversProblem::CLI
     end
   end
 
+  def sort_data
+    # @sorted_data = DriversProblem::Drivers.all.sort_by { |driver| driver.trip_distance }.reverse
+    @sorted_data = DriversProblem::Drivers.all.sort_by(&:trip_distance).reverse
+  end
+
   def final_output
     @sorted_data.each do |driver|
       driver.trip_output
     end
-  end
-
-  def sort_data
-    @sorted_data = DriversProblem::Drivers.all.sort_by { |driver| driver.trip_distance }.reverse
   end
 
 end

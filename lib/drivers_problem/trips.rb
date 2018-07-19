@@ -11,7 +11,7 @@ class DriversProblem::Trips
     arg[4] ? self.miles_driven=(arg[4]) : @miles_driven = nil
     @@all << self
     @driver.trip = self
-    @driver.trip_distance = @miles_driven if @miles_driven 
+    @driver.trip_distance += @miles_driven if @miles_driven 
   end
 
   def self.all
