@@ -1,5 +1,5 @@
 class DriversProblem::CLI
-  attr_accessor :data
+  attr_accessor :data, :sorted_data
 
   def call
     # puts "Please feed me your data..."
@@ -11,13 +11,12 @@ class DriversProblem::CLI
     # end
     # @data = STDIN.gets
     making_objects
+    sort_data
     final_output
   end
 
   def making_objects
     @data.each do |info|
-      # puts info
-      # puts "--------------------"
       if info.length > 2
         DriversProblem::Trips.new(info)
       else
@@ -27,9 +26,13 @@ class DriversProblem::CLI
   end
 
   def final_output
-    DriversProblem::Drivers.all.each do |driver|
+    @sorted_data.each do |driver|
       driver.trip_output
     end
+  end
+
+  def sort_data
+    @sorted_data = DriversProblem::Drivers.all.sort_by { |driver| driver.trip_distance }.reverse
   end
 
 end
