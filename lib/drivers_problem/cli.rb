@@ -17,9 +17,11 @@ class DriversProblem::CLI
 
   def making_objects
     @data.each do |info|
-      if info.length > 2
+      # puts "6------ #{info[0]}, #{info[1]} -------6"
+      case info[0]
+      when "Trip"
         DriversProblem::Trips.new(info)
-      else
+      when "Driver"
         DriversProblem::Drivers.new(info[1])
       end
     end
@@ -28,6 +30,7 @@ class DriversProblem::CLI
   def sort_data
     # @sorted_data = DriversProblem::Drivers.all.sort_by { |driver| driver.trip_distance }.reverse
     @sorted_data = DriversProblem::Drivers.all.sort_by(&:trip_distance).reverse
+    # puts "7------ #{@sorted_data[0].name}, #{@sorted_data[1].name}, #{@sorted_data[2].name} -------7"
   end
 
   def final_output
