@@ -1,10 +1,14 @@
 class DriversProblem::CLI
   attr_accessor :data, :sorted_data
 
+  def initialize(path = "../../input.txt")
+    @data = STDIN.read.split("\n").map {|line| line.split(" ")}
+  end
+
   def call
     # puts "Please feed me your data..."
     # @data = gets.split("\n").map {|line| line.split(" ")}
-    @data = STDIN.read.split("\n").map {|line| line.split(" ")}
+    # @data = STDIN.read.split("\n").map {|line| line.split(" ")}
 
     # ARGV.each do |b|
     #     puts b
@@ -20,10 +24,10 @@ class DriversProblem::CLI
       # puts "6------ #{info[0]}, #{info[1]} -------6"
       case info[0]
       when "Trip"
-        DriversProblem::Trips.new(info)
+        DriversProblem::Trip.new(info)
         # find_trip(info)
       when "Driver"
-        DriversProblem::Drivers.new(info[1])
+        DriversProblem::Driver.new(info[1])
       end
     end
   end
@@ -39,8 +43,7 @@ class DriversProblem::CLI
   # end
 
   def sort_data
-    # @sorted_data = DriversProblem::Drivers.all.sort_by { |driver| driver.trip_distance }.reverse
-    @sorted_data = DriversProblem::Drivers.all.sort_by(&:trip_distance).reverse
+    @sorted_data = DriversProblem::Driver.all.sort_by(&:trip_distance).reverse
     # puts "7------ #{@sorted_data[0].name}, #{@sorted_data[1].name}, #{@sorted_data[2].name} -------7"
   end
 

@@ -1,4 +1,4 @@
-class DriversProblem::Trips
+class DriversProblem::Trip
   attr_accessor :driver, :elapsed_time
   attr_reader :miles_driven, :trip_speed, :trip_output, :trip_time
 
@@ -16,7 +16,7 @@ class DriversProblem::Trips
     # @driver.elapsed_time == nil ? @driver.elapsed_time = self.calculate_time(arg[2], arg[3]) : @driver.elapsed_time += self.calculate_time(arg[2], arg[3])
     # @driver.elapsed_time += self.calculate_time(arg[2], arg[3])
     # self.avg_speed
-    @@all << self
+    # @@all << self
     @driver.trip = self
     if self.avg_speed > 5 && self.avg_speed < 100
       @driver.trip_distance += @miles_driven if @miles_driven
@@ -27,9 +27,9 @@ class DriversProblem::Trips
     # puts "4-------------4"
   end
 
-  def self.all
-    @@all
-  end
+  # def self.all
+  #   @@all
+  # end
 
   def self.update_trip(arg)
     # stuff
@@ -41,9 +41,9 @@ class DriversProblem::Trips
   end
 
   def find_driver(arg)
-    @driver = DriversProblem::Drivers.all.detect { |driver| driver.name == arg }
+    @driver = DriversProblem::Driver.all.detect { |driver| driver.name == arg }
 
-    @driver ||= DriversProblem::Drivers.new(arg)
+    @driver ||= DriversProblem::Driver.new(arg)
   end
 
   # def start_time=(data)
